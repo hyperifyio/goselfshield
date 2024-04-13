@@ -16,8 +16,8 @@ import (
 func main() {
 
 	// Define flags
-	sourceFile := flag.String("s", "", "set the source file")
-	outputFile := flag.String("o", "", "set the output file")
+	sourceFile := flag.String("source", "", "set the source file")
+	outputFile := flag.String("output", "", "set the output file")
 	privateKeyString := flag.String("private-key", parseStringEnv("PRIVATE_KEY", ""), "set private key")
 	version := flag.Bool("version", false, "Show version information")
 	initPrivateKey := flag.Bool("init-private-key", false, "Create a new private key and print it")

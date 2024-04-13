@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
@@ -61,6 +62,25 @@ func main() {
 		}
 	}
 
+	privateKey := *privateKeyString
+	if privateKey == "" {
+
+		reader := bufio.NewReader(os.Stdin)
+
+		fmt.Print("INSTALLER: Please enter your private key: ")
+		key, err := reader.ReadString('\n') // Read string up to the newline character
+		if err != nil {
+			fmt.Println("INSTALLER: Failed to read private key:", err)
+			return
+		}
+
+		// Trim newline or carriage return depending on the platform
+		key = strings.TrimSpace(key)
+
+		privateKey = key
+
+	}
+
 	encryptedData, err := fs.ReadFile(embeddedData, "encrypted.txt")
 	if err != nil {
 		fmt.Printf("INSTALLER: Error reading embedded data: %v\n", err)
@@ -68,7 +88,7 @@ func main() {
 		return
 	}
 
-	key, err := hex.DecodeString(*privateKeyString)
+	key, err := hex.DecodeString(privateKey)
 	if err != nil {
 		fmt.Printf("INSTALLER: Error decoding the private key: %v\n", err)
 		os.Exit(1)
