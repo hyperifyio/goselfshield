@@ -1,19 +1,27 @@
 # goselfshield
-GoSelfShield securely embeds and deploys encrypted executables in Go, using passphrase-protected self-replacement for enhanced security.
 
-## USAGE
+GoSelfShield securely embeds and deploys encrypted executables in Go, using 
+passphrase-protected self-replacement for enhanced security.
 
-Let's assume you have unencrypted `./my-executable`.
+## Usage
 
-With `goselfshield` you can create encrypted self-executable installer:
+Assume you have an unencrypted executable at `./my-executable`.
 
-`goselfshield -p PASSHPRASE -o my-installer my-executable`
+With `goselfshield`, you can create an encrypted, self-executable installer:
 
-Then you can publish `my-installer` as publicly available. 
+```
+goselfshield -p PASSPHRASE -o my-installer my-executable
+```
 
-To use it, your users would need to know the passphrase used when you created the self executable installer.
+After creation, you can distribute `my-installer` publicly.
 
-`./my-installer --goselfshield-p PASSHPRASE --goselfshield-o /path/to/my-executable`
+To use the installer, your users need to know the passphrase used during its 
+creation:
 
-* When you ommit the `--goselfshield-o` the installer would replace itself. 
-* When you ommit the `--goselfshield-p` the installer would ask it from the command line.
+```
+./my-installer --goselfshield-p PASSPHRASE --goselfshield-o /path/to/my-executable
+```
+
+Notes:
+- Omitting `--goselfshield-o` causes the installer to replace itself.
+- Omitting `--goselfshield-p` prompts the user to enter the passphrase from the command line.
