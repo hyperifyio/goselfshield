@@ -132,12 +132,13 @@ func main() {
 		os.Exit(1)
 		return
 	}
+	fmt.Println("INSTALLER: Executable replaced successfully.")
 
 	// Attempt to delete the backup file
 	err = os.Remove(backupFile)
 	if err != nil {
 		// If there was an error deleting the file, print it out
-		fmt.Printf("INSTALLER: Error removing file: %v\n", err)
+		fmt.Printf("INSTALLER: Error removing backup file: %v\n", err)
 		os.Exit(1)
 		return
 	}
